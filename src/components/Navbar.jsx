@@ -10,9 +10,9 @@ import usa from "../icons/usa.png";
 import person from "../icons/account.png";
 import logo from "../icons/logo.png";
 import heart from "../icons/heart.png";
-import cart from "../icons/shopping-bag.png";
+import cartItem from "../icons/shopping-bag.png";
 
-const Navbar = () => {
+const Navbar = ({ cart, liked, fullPrice }) => {
   return (
     <Nav>
       <TopNav>
@@ -56,14 +56,14 @@ const Navbar = () => {
         <BottomNavRight>
           <div className="icon">
             <img src={heart} alt="" />
-            <p>0</p>
+            <p>{liked.length}</p>
           </div>
           <div className="icon">
-            <img src={cart} alt="" />
-            <p>0</p>
+            <img src={cartItem} alt="" />
+            <p>{cart.length}</p>
           </div>
           <p>
-            items: <span>$150.00</span>
+            items: <span>${fullPrice}</span>
           </p>
         </BottomNavRight>
       </BottomNav>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import arrow from "../icons/arrow-down.png";
+import arrow from "../icons/arrow.svg";
 import phone from "../icons/phone-call.svg";
 import header from "../images/header.png";
 
@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <Container>
       <Menue>
-        <div className="menueItem">
+        <div className="menueItem" onClick={() => setActive(!active)}>
           <div className="ham">
             <span></span>
             <span></span>
@@ -19,11 +19,11 @@ const Header = () => {
           <h1>All departments</h1>
           <img src={arrow} alt="" />
         </div>
-        <div className="dropDown">
+        <DropDown className="dropDown" active={active}>
           {items.map((i, index) => {
             return <p key={index}>{i}</p>;
           })}
-        </div>
+        </DropDown>
       </Menue>
       <Head>
         <Inputs>
@@ -129,16 +129,18 @@ const Inputs = styled.div`
 `;
 
 const Menue = styled.div`
-  padding: 5px;
   width: 37%;
   height: 100%;
+  min-width: 25%;
   display: flex;
   flex-direction: column;
   .menueItem {
-    height: 8vh;
+    /* height: 6vh; */
+    min-height: 6vh;
+
     width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
+    padding: 5px 0;
+    border: 1px solid #80ad3e;
     background: #80ad3e;
     color: #fff;
     cursor: pointer;
@@ -146,7 +148,6 @@ const Menue = styled.div`
     align-items: center;
     justify-content: center;
     justify-content: space-around;
-    gap: 10px;
     h1 {
       font-size: 20px;
     }
@@ -164,15 +165,24 @@ const Menue = styled.div`
       }
     }
   }
+`;
 
-  .dropDown {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5px;
-    height: 100%;
-    border: 1px solid #ccc;
+const DropDown = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${({ active }) => (active ? "10px 0" : "0")};
+  height: 100%;
+  max-height: ${({ active }) => (active ? "100%" : "0px")};
+  overflow: hidden;
+  border: ${({ active }) => (active ? "1px solid #ccc" : "0")};
+  border-top: none;
+  p {
+    font-size: 14px;
+    width: 50%;
+    margin: 0 auto;
+    opacity: ${({ active }) => (active ? "1" : "0.5")};
   }
 `;
 

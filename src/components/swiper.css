@@ -1,0 +1,12 @@
+.swiper {
+  height: 60vh;
+}
+
+.swiper-pagination span {
+  background: #000;
+}
+
+.swiper-pagination {
+  width: 100% !important;
+  margin-bottom: 5% !important;
+}
