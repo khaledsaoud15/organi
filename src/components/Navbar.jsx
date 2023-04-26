@@ -13,6 +13,11 @@ import heart from "../icons/heart.png";
 import cartItem from "../icons/shopping-bag.png";
 
 const Navbar = ({ cart, liked, fullPrice }) => {
+
+
+  
+
+
   return (
     <Nav>
       <TopNav>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { featured } from "../data";
 import heart from "../icons/heart.png";
 import cartIcon from "../icons/shopping-bag.png";
@@ -11,18 +11,31 @@ const Featured = ({
   setLiked,
   fullPrice,
   setFullPrice,
+  genra,
+  setGenra,
+  filtered,
+  setFiltered,
+  data,
 }) => {
+  const [count, setCount] = useState(1);
+
   const addToCart = (id) => {
-    const find = featured.find((f) => f.id === id);
+    const find = data.find((f) => f.id === id);
     if (cart.includes(find)) {
-      alert("prodcut already Exist");
+      setCount(count + 1);
+      setFullPrice((fullPrice += parseInt(find.price)));
     } else {
       setCart([...cart, find]);
       setFullPrice((fullPrice += parseInt(find.price)));
     }
   };
+
+  console.log(cart);
+
+  // Liked function to push liked elements if there is none
   const addToLiked = (id) => {
-    const find = featured.find((f) => f.id === id);
+    // loop over the products and find the first occurence
+    const find = data.find((f) => f.id === id);
     if (liked.includes(find)) {
       liked.splice(liked.indexOf(find), 1);
       setLiked([...liked]);
@@ -30,22 +43,28 @@ const Featured = ({
       setLiked([...liked, find]);
     }
   };
-  console.log(fullPrice);
-  console.log(liked);
-  console.log(cart);
+
+  useEffect(() => {
+    if (genra === "all") {
+      setFiltered(data);
+      return;
+    }
+    const filteredData = data.filter((product) => product.category === genra);
+    setFiltered(filteredData);
+  }, [genra]);
 
   return (
     <Container>
       <Head>Featured</Head>
       <Filter>
-        <p>All</p>
-        <p>Oranges</p>
-        <p>Fresh Meat</p>
-        <p>Vegetables</p>
-        <p>Fast Food</p>
+        <p onClick={() => setGenra("all")}>All</p>
+        <p onClick={() => setGenra("Oranges")}>Oranges</p>
+        <p onClick={() => setGenra("Fresh Meat")}>Fresh Meat</p>
+        <p onClick={() => setGenra("Vegetables")}>Vegetables</p>
+        <p onClick={() => setGenra("Fast Food")}>Fast Food</p>
       </Filter>
       <Grid>
-        {featured.map((card) => {
+        {filtered.map((card) => {
           return (
             <Card key={card.id}>
               <Images>

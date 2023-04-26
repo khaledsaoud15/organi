@@ -57,7 +57,7 @@ const Container = styled.div`
 `;
 const Card = styled.div`
   width: 100%;
-  height: 40vh;
+  height: 50vh;
   background-color: #f4f6fa;
   display: flex;
   align-items: center;
