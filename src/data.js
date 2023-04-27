@@ -1,6 +1,9 @@
 import orange from "./images/oranges.png";
 import meat from "./images/meat.png";
 import dried from "./images/dried-fruits.png";
+import blog1 from "./images/blog-1.jpg";
+import blog2 from "./images/blog-2.jpg";
+import blog3 from "./images/blog-3.jpg";
 
 export const products = [
   {
@@ -108,5 +111,20 @@ export const slide = [
     img: orange,
     price: "30.000",
     category: "Vegetables",
+  },
+];
+
+export const blog = [
+  {
+    img: blog1,
+    title: "Cooking tips make cooking simple",
+  },
+  {
+    img: blog2,
+    title: "6 ways to prepare breakfast for 30",
+  },
+  {
+    img: blog3,
+    title: "Visit the clean farm in the US",
   },
 ];

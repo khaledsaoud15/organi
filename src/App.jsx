@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Featured from "./components/Featured";
-import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import Slider from "./components/Slider";
-import Banner from "./components/Banner";
 import { featured } from "./data";
-import BigSlider from "./components/BigSlider";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import { Routes, Route } from "react-router-dom";
+import Cart from "./pages/Cart";
+import SinglProduct from "./components/SinglProduct";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -18,24 +18,30 @@ function App() {
   return (
     <>
       <Navbar cart={cart} liked={liked} fullPrice={fullPrice} />
-      <Header />
-      <Slider />
-      <Featured
-        cart={cart}
-        setCart={setCart}
-        liked={liked}
-        setLiked={setLiked}
-        fullPrice={fullPrice}
-        setFullPrice={setFullPrice}
-        data={data}
-        setData={setData}
-        filtered={filtered}
-        genra={genra}
-        setGenra={setGenra}
-        setFiltered={setFiltered}
-      />
-      <Banner />
-      <BigSlider />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              cart={cart}
+              setCart={setCart}
+              liked={liked}
+              setLiked={setLiked}
+              fullPrice={fullPrice}
+              setFullPrice={setFullPrice}
+              data={data}
+              setData={setData}
+              filtered={filtered}
+              genra={genra}
+              setGenra={setGenra}
+              setFiltered={setFiltered}
+            />
+          }
+        />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:id" element={<SinglProduct data={data} />} />
+      </Routes>
+      <Footer />
     </>
   );
 }

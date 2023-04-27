@@ -3,6 +3,7 @@ import { featured } from "../data";
 import heart from "../icons/heart.png";
 import cartIcon from "../icons/shopping-bag.png";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Featured = ({
   cart,
@@ -17,20 +18,16 @@ const Featured = ({
   setFiltered,
   data,
 }) => {
-  const [count, setCount] = useState(1);
-
+  // add to cart function to push  elements if there is none and increment price if it already exists
   const addToCart = (id) => {
     const find = data.find((f) => f.id === id);
     if (cart.includes(find)) {
-      setCount(count + 1);
       setFullPrice((fullPrice += parseInt(find.price)));
     } else {
       setCart([...cart, find]);
       setFullPrice((fullPrice += parseInt(find.price)));
     }
   };
-
-  console.log(cart);
 
   // Liked function to push liked elements if there is none
   const addToLiked = (id) => {
@@ -67,17 +64,23 @@ const Featured = ({
         {filtered.map((card) => {
           return (
             <Card key={card.id}>
-              <Images>
-                <img src={card.img} alt="" />
-                <Icons>
-                  <img src={heart} alt="" onClick={() => addToLiked(card.id)} />
-                  <img
-                    src={cartIcon}
-                    alt=""
-                    onClick={() => addToCart(card.id)}
-                  />
-                </Icons>
-              </Images>
+              <NavLink to={`/product/${card.id}`}>
+                <Images>
+                  <img src={card.img} alt="" />
+                  <Icons>
+                    <img
+                      src={heart}
+                      alt=""
+                      onClick={() => addToLiked(card.id)}
+                    />
+                    <img
+                      src={cartIcon}
+                      alt=""
+                      onClick={() => addToCart(card.id)}
+                    />
+                  </Icons>
+                </Images>
+              </NavLink>
               <h1>{card.title}</h1>
               <p>${card.price}</p>
             </Card>

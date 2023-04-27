@@ -11,13 +11,9 @@ import person from "../icons/account.png";
 import logo from "../icons/logo.png";
 import heart from "../icons/heart.png";
 import cartItem from "../icons/shopping-bag.png";
+import { NavLink } from "react-router-dom";
 
 const Navbar = ({ cart, liked, fullPrice }) => {
-
-
-  
-
-
   return (
     <Nav>
       <TopNav>
@@ -52,7 +48,9 @@ const Navbar = ({ cart, liked, fullPrice }) => {
           <img src={logo} alt="" />
         </BottomNavLeft>
         <BottomNavCenter>
-          <a href="">HOME</a>
+          <NavLink to="/">
+            <a href="">HOME</a>
+          </NavLink>
           <a href="">SHOP</a>
           <a href="">PAGES</a>
           <a href="">BLOG</a>
@@ -63,10 +61,12 @@ const Navbar = ({ cart, liked, fullPrice }) => {
             <img src={heart} alt="" />
             <p>{liked.length}</p>
           </div>
-          <div className="icon">
-            <img src={cartItem} alt="" />
-            <p>{cart.length}</p>
-          </div>
+          <NavLink to="/cart">
+            <div className="icon">
+              <img src={cartItem} alt="" />
+              <p>{cart.length}</p>
+            </div>
+          </NavLink>
           <p>
             items: <span>${fullPrice}</span>
           </p>
