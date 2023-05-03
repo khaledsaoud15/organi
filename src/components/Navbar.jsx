@@ -1,4 +1,4 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import mail from "../icons/mail.png";
 import styled from "styled-components";
 import pinterest from "../icons/pinterest.svg";
@@ -13,7 +13,10 @@ import heart from "../icons/heart.png";
 import cartItem from "../icons/shopping-bag.png";
 import { NavLink } from "react-router-dom";
 
-const Navbar = ({ cart, liked, fullPrice }) => {
+const Navbar = () => {
+  const cart = useSelector((props) => props.cart.cart);
+  const liked = useSelector((props) => props.liked.like);
+  const total = useSelector((props) => props.cart.total);
   return (
     <Nav>
       <TopNav>
@@ -68,7 +71,7 @@ const Navbar = ({ cart, liked, fullPrice }) => {
             </div>
           </NavLink>
           <p>
-            items: <span>${fullPrice}</span>
+            items: <span>${+total}</span>
           </p>
         </BottomNavRight>
       </BottomNav>

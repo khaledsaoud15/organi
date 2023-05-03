@@ -5,32 +5,16 @@ import Featured from "../components/Featured";
 import Banner from "../components/Banner";
 import BigSlider from "../components/BigSlider";
 import BlogPosts from "../components/BlogPosts";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-const Home = ({
-  cart,
-  setCart,
-  liked,
-  setLiked,
-  fullPrice,
-  setFullPrice,
-  data,
-  setData,
-  filtered,
-  setFiltered,
-  genra,
-  setGenra,
-}) => {
+const Home = ({ data, setData, filtered, setFiltered, genra, setGenra }) => {
   return (
     <div>
+      <Navbar />
       <Header />
       <Slider />
       <Featured
-        cart={cart}
-        setCart={setCart}
-        liked={liked}
-        setLiked={setLiked}
-        fullPrice={fullPrice}
-        setFullPrice={setFullPrice}
         data={data}
         setData={setData}
         filtered={filtered}
@@ -41,6 +25,7 @@ const Home = ({
       <Banner />
       <BigSlider />
       <BlogPosts />
+      <Footer />
     </div>
   );
 };

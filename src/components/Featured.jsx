@@ -1,43 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { featured } from "../data";
+import { useSelector, useDispatch } from "react-redux";
 import heart from "../icons/heart.png";
 import cartIcon from "../icons/shopping-bag.png";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { addLiked, removeLiked } from "../redux/likedSlice";
 
-const Featured = ({
-  cart,
-  setCart,
-  liked,
-  setLiked,
-  fullPrice,
-  setFullPrice,
-  genra,
-  setGenra,
-  filtered,
-  setFiltered,
-  data,
-}) => {
-  // add to cart function to push  elements if there is none and increment price if it already exists
-  const addToCart = (id) => {
-    const find = data.find((f) => f.id === id);
-    if (cart.includes(find)) {
-      setFullPrice((fullPrice += parseInt(find.price)));
-    } else {
-      setCart([...cart, find]);
-      setFullPrice((fullPrice += parseInt(find.price)));
-    }
-  };
+const Featured = ({ genra, setGenra, filtered, setFiltered, data }) => {
+  const liked = useSelector((props) => props.liked.like);
+  const dispatch = useDispatch();
 
   // Liked function to push liked elements if there is none
-  const addToLiked = (id) => {
+  const addToLikedItem = (id) => {
     // loop over the products and find the first occurence
     const find = data.find((f) => f.id === id);
     if (liked.includes(find)) {
-      liked.splice(liked.indexOf(find), 1);
-      setLiked([...liked]);
+      dispatch(removeLiked(find));
     } else {
-      setLiked([...liked, find]);
+      dispatch(addLiked(find));
     }
   };
 
@@ -64,23 +44,21 @@ const Featured = ({
         {filtered.map((card) => {
           return (
             <Card key={card.id}>
-              <NavLink to={`/product/${card.id}`}>
-                <Images>
+              <Images>
+                <NavLink to={`/product/${card.id}`}>
                   <img src={card.img} alt="" />
-                  <Icons>
-                    <img
-                      src={heart}
-                      alt=""
-                      onClick={() => addToLiked(card.id)}
-                    />
-                    <img
-                      src={cartIcon}
-                      alt=""
-                      onClick={() => addToCart(card.id)}
-                    />
-                  </Icons>
-                </Images>
-              </NavLink>
+                </NavLink>
+                <Icons>
+                  <img
+                    src={heart}
+                    alt=""
+                    onClick={() => addToLikedItem(card.id)}
+                  />
+                  <NavLink to={`/product/${card.id}`}>
+                    <img src={cartIcon} alt="" />
+                  </NavLink>
+                </Icons>
+              </Images>
               <h1>{card.title}</h1>
               <p>${card.price}</p>
             </Card>
