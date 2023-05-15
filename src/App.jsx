@@ -7,6 +7,7 @@ import SinglProduct from "./components/SinglProduct";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Loader from "./components/Loader";
+import Admin from "./pages/Admin";
 
 function App() {
   const [data, setData] = useState(featured);
@@ -51,6 +52,7 @@ function App() {
             path="/login"
             element={<Login inputs={inputs} setInputs={setInputs} />}
           />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       )}
     </>
